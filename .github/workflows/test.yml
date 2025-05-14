@@ -35,6 +35,8 @@ jobs:
 
       # Step 4: Start the server in the background, then wait for it to be accessible
       - name: Start the server in background
+        env:
+          MONGODB_URI: ${{ secrets.MONGODB_URI }}
         run: |
           npm run develop &                     # Start the app in the background
           npx wait-on http://localhost:3001  # Wait until the server is ready
