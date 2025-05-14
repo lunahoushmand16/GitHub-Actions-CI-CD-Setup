@@ -8,9 +8,11 @@ const Quiz = () => {
   const [score, setScore] = useState(0);
   const [quizCompleted, setQuizCompleted] = useState(false);
   const [quizStarted, setQuizStarted] = useState(false);
+  const [isLoading, setIsLoading] = useState(false); // ✅ loading state
 
   const getRandomQuestions = async () => {
     try {
+      setIsLoading(true); // show spinner
       const questions = await getQuestions();
 
       if (!questions) {
@@ -20,6 +22,8 @@ const Quiz = () => {
       setQuestions(questions);
     } catch (err) {
       console.error(err);
+    } finally {
+      setIsLoading(false); // hide spinner
     }
   };
 
@@ -43,6 +47,17 @@ const Quiz = () => {
     setScore(0);
     setCurrentQuestionIndex(0);
   };
+
+  // ✅ Show loading spinner (Bootstrap style)
+  if (isLoading) {
+    return (
+      <div className="d-flex justify-content-center align-items-center vh-100">
+        <div className="spinner-border text-primary" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </div>
+      </div>
+    );
+  }
 
   if (!quizStarted) {
     return (
