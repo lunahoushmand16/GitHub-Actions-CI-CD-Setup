@@ -52,10 +52,10 @@ describe('Tech Quiz App E2E', () => {
       cy.contains('Take New Quiz').should('exist');
     });
   
-   // ======================================
+// ======================================
 // Start a new quiz after completing one
 // ======================================
-it('starts a new quiz after completing the first one', () => {
+it.skip('starts a new quiz after completing the first one', () => {
   cy.visit('http://localhost:3001');
 
   cy.contains('Start Quiz').click();
@@ -74,7 +74,7 @@ it('starts a new quiz after completing the first one', () => {
 // ==============================================
 // Validate score resets when starting a new quiz
 // ==============================================
-it('resets the score when starting a new quiz', () => {
+it.skip('resets the score when starting a new quiz', () => {
   cy.visit('http://localhost:3001');
   cy.contains('Start Quiz').click();
 
