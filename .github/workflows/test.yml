@@ -15,11 +15,11 @@ jobs:
     steps:
       # Step 1: Checkout the pull request code
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
 
       # Step 2: Setup the current Node.js version in the matrix
       - name: Set up Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
 
