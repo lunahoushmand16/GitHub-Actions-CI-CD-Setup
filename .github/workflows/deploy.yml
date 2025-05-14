@@ -1,3 +1,6 @@
+# ✅ Step: Trigger Render Deployment
+# This step triggers a manual deployment on Render using the deploy hook URL
+# Only runs if the code was pushed to the 'develop' branch
 name: Deploy to Render (Production)
 
 on:
@@ -11,7 +14,9 @@ jobs:
 
     steps:
       - name: Trigger Render Production Deploy
+        # 🛠 Set environment variable for the deploy hook URL (from GitHub Secrets)
         env:
           DEPLOY_URL: ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
+        # 🚀 Send a request to trigger the deployment via Render's Deploy Hook
         run: |
           curl "$DEPLOY_URL"
