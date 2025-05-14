@@ -24,5 +24,10 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Start the server in background
+        run: |
+          npm run dev &
+          npx wait-on http://localhost:3001
+
       - name: Run Cypress tests
         run: npx cypress run
