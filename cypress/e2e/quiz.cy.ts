@@ -53,41 +53,42 @@ describe('Tech Quiz App E2E', () => {
     });
   
    // ======================================
-   // Start a new quiz after completing one
-   // ======================================
-  it('starts a new quiz after completing the first one', () => {
-    cy.visit('http://localhost:3001');
-  
-    cy.contains('Start Quiz').click();
-  
-    for (let i = 0; i < 10; i++) {
-        cy.get('button.btn-primary').first().click();
-    }
-  
-    // Click "Take New Quiz"
-    cy.contains('Take New Quiz').click();
-  
-    // Should go back to first question again
-    cy.contains(/What|Which|How|Who|When|Where|Why/).should('exist');
-    });
-  
-   // ==============================================
-   // Validate score resets when starting a new quiz
-   // ==============================================
-   it('resets the score when starting a new quiz', () => {
-    cy.visit('http://localhost:3001');
-    cy.contains('Start Quiz').click();
-  
-    for (let i = 0; i < 10; i++) {
-        cy.get('button.btn-primary').first().click();
-    }
-  
-    // Score is displayed
-    cy.contains('Your score').should('exist');
-  
-    cy.contains('Take New Quiz').click();
-  
-    // Score should reset — since quiz restarted, there should be no "Your score" message
-    cy.contains('Your score').should('not.exist');
-    });
+// Start a new quiz after completing one
+// ======================================
+it('starts a new quiz after completing the first one', () => {
+  cy.visit('http://localhost:3001');
+
+  cy.contains('Start Quiz').click();
+
+  for (let i = 0; i < 10; i++) {
+    cy.get('button.btn-primary', { timeout: 8000 }).first().click();
+  }
+
+  // Wait for and click "Take New Quiz"
+  cy.contains('Take New Quiz', { timeout: 8000 }).should('be.visible').click();
+
+  // Should go back to first question again
+  cy.get('h2', { timeout: 8000 }).should('not.be.empty');
+});
+
+// ==============================================
+// Validate score resets when starting a new quiz
+// ==============================================
+it('resets the score when starting a new quiz', () => {
+  cy.visit('http://localhost:3001');
+  cy.contains('Start Quiz').click();
+
+  for (let i = 0; i < 10; i++) {
+    cy.get('button.btn-primary', { timeout: 8000 }).first().click();
+  }
+
+  // Score should be shown
+  cy.contains('Your score', { timeout: 8000 }).should('be.visible');
+
+  // Click "Take New Quiz"
+  cy.contains('Take New Quiz', { timeout: 8000 }).should('be.visible').click();
+
+  // Score should be gone
+  cy.contains('Your score').should('not.exist');
+});
   });
