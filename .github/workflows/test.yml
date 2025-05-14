@@ -34,7 +34,7 @@ jobs:
       - name: Seed MongoDB
         run: npm run seed
         env:
-        MONGODB_URI: ${{ secrets.MONGODB_URI }}
+          MONGODB_URI: ${{ secrets.MONGODB_URI }}
 
       # Step 5: Start server & client in background, wait for port
       - name: Start the server in background
