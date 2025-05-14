@@ -7,9 +7,12 @@ export default async function cleanDB(modelName: "Question", collectionName: str
     const model = models[modelName];
 
     // Type check for safety
-    if (!model?.db?.db) {
+    // if (!model?.db?.db) {
+    //   throw new Error(`Model "${modelName}" or its DB connection is not defined.`);
+    // }
+    if (!model || !model.db || !model.db.db) {
       throw new Error(`Model "${modelName}" or its DB connection is not defined.`);
-    }
+    }    
 
     // Check if the collection exists before trying to drop it
     const collections = await model.db.db.listCollections({
