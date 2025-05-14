@@ -37,4 +37,3 @@ cypress/screenshots/
 *.njsproj
 *.sln
 *.sw?
-.env
