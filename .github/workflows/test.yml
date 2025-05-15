@@ -56,22 +56,17 @@ jobs:
         with:
           name: mochawesome-report-node-${{ matrix.node-version }}
           path: cypress/reports
-      
+
       # ✅ Step 9: Create GitHub Summary (optional but visual)
       - name: Write Cypress results to GitHub summary
         if: always()
         run: |
-# Merge mochawesome JSON reports
-          npx mochawesome-merge cypress/reports/*.json > merged-report.json 
-
-# Extract values using jq
+          npx mochawesome-merge cypress/reports/*.json > merged-report.json
           PASSES=$(jq '.stats.passes' merged-report.json)
           FAILS=$(jq '.stats.failures' merged-report.json)
           DURATION=$(jq '.stats.duration' merged-report.json)
-
-# Write dynamic summary
           echo "### ✅ Cypress Results (Node.js ${{ matrix.node-version }})" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "| Result | Passed ✅ | Failed ❌ | Duration ⏱️ |" >> $GITHUB_STEP_SUMMARY
-          echo "|--------|-----------|------------|--------------|" >> $GITHUB_STEP_SUMMARY
-          echo "|        | $PASSES   | $FAILS     | ${DURATION}ms  |" >> $GITHUB_STEP_SUMMARY
+          echo "|--------|-----------|-----------|--------------|" >> $GITHUB_STEP_SUMMARY
+          echo "|        | $PASSES   | $FAILS    | ${DURATION}ms |" >> $GITHUB_STEP_SUMMARY
