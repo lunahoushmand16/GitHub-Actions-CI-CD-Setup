@@ -18,7 +18,7 @@ export default defineConfig({
     reporterOptions: {
       reportDir: 'cypress/reports',
       overwrite: false,
-      html: true,
+      html: false,
       json: true
     },
     setupNodeEvents(on, config) {
