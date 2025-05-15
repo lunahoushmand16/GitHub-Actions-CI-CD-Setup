@@ -31,12 +31,13 @@ jobs:
       - name: Build client
         run: cd client && npm install && npm run build
 
+      # Step 5: Seed database
       - name: Seed MongoDB
         run: npm run seed
         env:
           MONGODB_URI: ${{ secrets.MONGODB_URI }}
 
-      # Step 5: Start server & client in background, wait for port
+      # Step 6: Start server in background and wait
       - name: Start the server in background
         env:
           MONGODB_URI: ${{ secrets.MONGODB_URI }}
@@ -44,14 +45,14 @@ jobs:
           npm run develop &
           npx wait-on http://localhost:3001
 
-      # Step 6: Run Cypress tests
+      # Step 7: Run Cypress tests
       - name: Run Cypress tests
         run: npx cypress run
 
-      # Update GitHub Action to Upload the Report 
+      # ✅ Step 8: Upload mochawesome report
       - name: Upload mochawesome report
         if: always()
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: mochawesome-report
           path: cypress/reports
