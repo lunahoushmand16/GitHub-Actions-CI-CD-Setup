@@ -49,10 +49,10 @@ jobs:
       - name: Run Cypress tests
         run: npx cypress run
 
-      # ✅ Step 8: Upload mochawesome report
+      # ✅ Step 8: Upload mochawesome report (fix duplicate name conflict)
       - name: Upload mochawesome report
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: mochawesome-report
+          name: mochawesome-report-node-${{ matrix.node-version }}
           path: cypress/reports
