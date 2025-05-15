@@ -58,12 +58,8 @@ This project is a Tech Quiz application enhanced with Cypress tests for both com
 
 ### Screenshots:
 
-![Start Quiz & Ansering Qtn](./Assets/Start-Answers%20Quiz.png)
-![Score Page](./Assets/Finished-Quiz.png)
-![E2E Testing on Cypress](./Assets/E2E-Testing-Cypress.png)
-![GitHub Actions Tests]()
-![GitHub Actions deployments]()
-
+![GitHub Actions Tests](./Assets/GitHub-Actions%20-tests.png)
+![GitHub Actions deployments](./Assets/GitHub-Actions-deployments.png)
 
 ## Credits
 

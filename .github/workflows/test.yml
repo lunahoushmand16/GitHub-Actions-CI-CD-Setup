@@ -47,3 +47,11 @@ jobs:
       # Step 6: Run Cypress tests
       - name: Run Cypress tests
         run: npx cypress run
+
+      # Update GitHub Action to Upload the Report 
+      - name: Upload mochawesome report
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: mochawesome-report
+          path: cypress/reports
